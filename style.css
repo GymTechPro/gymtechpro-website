@@ -185,3 +185,71 @@ footer {
     color: var(--text-muted);
     font-size: 0.8rem;
 }
+/* =========================================
+   MOBILE RESPONSIVENESS (MEDIA QUERIES)
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+    /* Header & Navigation */
+    header {
+        flex-direction: column;
+        padding: 15px 20px;
+        text-align: center;
+    }
+
+    nav {
+        margin: 15px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 0;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .hero-buttons a {
+        width: 100%;
+    }
+
+    /* Layout Grids (Services & Maintenance) */
+    .services, .maintenance {
+        padding: 50px 20px;
+    }
+
+    .service-grid, .plan-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .service-card, .plan-card {
+        width: 100%;
+        min-width: unset; /* Removes the minimum width constraint */
+    }
+
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    footer {
+        padding: 40px 20px;
+    }
+}
