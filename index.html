@@ -19,7 +19,7 @@
             <a href="#maintenance">Maintenance Plans</a>
             <a href="#about">About</a>
         </nav>
-        <a href="#contact" class="btn-primary">Book a Service</a>
+        <button type="button" class="btn-primary" data-open-booking>Book a Service</button>
     </header>
 
     <!-- Hero Section -->
@@ -29,7 +29,7 @@
             <h2>Repair. Diagnose. Maintain. Install.</h2>
             <p>Keep your fitness equipment running reliably with professional repair, diagnostics, maintenance, and installation from GymTech Pro.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn-primary">Book a Service</a>
+                <button type="button" class="btn-primary" data-open-booking>Book a Service</button>
                 <a href="#contact" class="btn-secondary">Contact GymTech Pro</a>
             </div>
         </div>
@@ -84,7 +84,7 @@
     <!-- Footer / Contact -->
     <footer id="contact">
         <div class="footer-content">
-            <div class="brand">
+            <div class="brand" id="about">
                 <span class="logo-gt">GT</span> GYMTECH <span class="logo-pro">PRO</span>
                 <p>7 years of hands-on fitness equipment experience.</p>
             </div>
@@ -93,6 +93,7 @@
                 <p>Phone: +1-437-777-9446</p>
                 <p>Email: info@gymtechpro.ca</p>
                 <p>Serving the GTA: Oakville, Brampton, Mississauga, Milton, Etobicoke, Toronto</p>
+                <button type="button" class="btn-primary footer-book-btn" data-open-booking>Book a Service</button>
             </div>
         </div>
         <div class="copyright">
@@ -100,5 +101,56 @@
         </div>
     </footer>
 
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="booking-modal" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+            <button type="button" class="modal-close" id="close-booking" aria-label="Close form">&times;</button>
+            <h3 id="booking-title">Book a Service</h3>
+            <p class="modal-subtitle">Fill out the form and we'll get back to you shortly.</p>
+
+            <form
+                action="https://formsubmit.co/info@gymtechpro.ca"
+                method="POST"
+                id="booking-form"
+            >
+                <!-- FormSubmit settings -->
+                <input type="hidden" name="_subject" value="New Service Booking — GymTech Pro">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+                <!-- After submit, FormSubmit shows a thank-you page.
+                     Optionally set _next to your live GitHub Pages URL, e.g.:
+                     <input type="hidden" name="_next" value="https://YOURUSER.github.io/YOURREPO/#contact">
+                -->
+
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required>
+
+                <label for="contact-info">Contact Info</label>
+                <input type="text" id="contact-info" name="contact_info" placeholder="Phone or email" required>
+
+                <label for="service-type">Service Needed</label>
+                <select id="service-type" name="service_type" required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="Repair & Diagnostic">Repair & Diagnostic</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Install">Install</option>
+                    <option value="Essential Plan">Essential Plan (every 6 months)</option>
+                    <option value="Performance Plan">Performance Plan (every 3 months)</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="location">Location / City</label>
+                <input type="text" id="location" name="location" placeholder="e.g. Mississauga" required>
+
+                <label for="query">Query / Details</label>
+                <textarea id="query" name="query" rows="4" placeholder="Describe the equipment and issue, preferred timing, etc." required></textarea>
+
+                <button type="submit" class="btn-primary btn-submit">Book Service</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
