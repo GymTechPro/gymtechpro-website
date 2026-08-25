@@ -93,9 +93,19 @@ nav a:hover { color: var(--accent-blue); }
 
 /* Hero Section */
 .hero {
-    padding: 100px 50px;
+    padding: 140px 50px;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('hero-bg-placeholder.jpg') center/cover;
+    background-color: var(--bg-dark);
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.72)),
+        url('hero-bg.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .hero h1 {
