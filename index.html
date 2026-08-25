@@ -102,7 +102,7 @@
     </footer>
 
     <!-- Booking Modal -->
-    <div class="modal-overlay" id="booking-modal" hidden>
+    <div class="modal-overlay" id="booking-modal" aria-hidden="true">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
             <button type="button" class="modal-close" id="close-booking" aria-label="Close form">&times;</button>
             <h3 id="booking-title">Book a Service</h3>
@@ -117,11 +117,8 @@
                 <input type="hidden" name="_subject" value="New Service Booking — GymTech Pro">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" id="form-next" value="">
                 <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-                <!-- After submit, FormSubmit shows a thank-you page.
-                     Optionally set _next to your live GitHub Pages URL, e.g.:
-                     <input type="hidden" name="_next" value="https://YOURUSER.github.io/YOURREPO/#contact">
-                -->
 
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Your full name" required>
@@ -151,6 +148,63 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="toast" id="booking-toast" hidden>
+        Thanks! Your booking request was sent. We'll contact you soon.
+    </div>
+
+    <script>
+        (function () {
+            var modal = document.getElementById('booking-modal');
+            var closeBtn = document.getElementById('close-booking');
+            var form = document.getElementById('booking-form');
+            var nextField = document.getElementById('form-next');
+            var toast = document.getElementById('booking-toast');
+            if (!modal) return;
+
+            // Send users back to this page after FormSubmit processes the form
+            if (form && nextField) {
+                form.addEventListener('submit', function () {
+                    nextField.value = window.location.origin + window.location.pathname + '?submitted=1';
+                });
+            }
+
+            // Show a short confirmation when redirected back
+            if (toast && /[?&]submitted=1/.test(window.location.search)) {
+                toast.hidden = false;
+                history.replaceState(null, '', window.location.pathname);
+                setTimeout(function () {
+                    toast.hidden = true;
+                }, 5000);
+            }
+
+            function openModal() {
+                modal.classList.add('is-open');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+                var firstField = document.getElementById('name');
+                if (firstField) firstField.focus();
+            }
+
+            function closeModal() {
+                modal.classList.remove('is-open');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+            }
+
+            document.querySelectorAll('[data-open-booking]').forEach(function (btn) {
+                btn.addEventListener('click', openModal);
+            });
+
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+            });
+        })();
+    </script>
 </body>
 </html>
