@@ -20,6 +20,10 @@ body {
     line-height: 1.6;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
 /* Header & Navigation */
 header {
     display: flex;
@@ -60,6 +64,9 @@ nav a:hover { color: var(--accent-blue); }
     font-weight: bold;
     text-transform: uppercase;
     font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
 }
 
 .btn-primary {
@@ -68,10 +75,20 @@ nav a:hover { color: var(--accent-blue); }
     border: 2px solid var(--accent-blue);
 }
 
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0069d9;
+}
+
 .btn-secondary {
     background-color: transparent;
     color: var(--text-main);
     border: 2px solid var(--text-main);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
 }
 
 /* Hero Section */
@@ -179,12 +196,124 @@ footer {
     margin: 5px 0;
 }
 
+.footer-book-btn {
+    margin-top: 20px;
+}
+
 .copyright {
     text-align: center;
     margin-top: 40px;
     color: var(--text-muted);
     font-size: 0.8rem;
 }
+
+/* =========================================
+   BOOKING MODAL
+   ========================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.modal {
+    background-color: var(--bg-card);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 36px 32px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: var(--text-main);
+}
+
+.modal h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.modal-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+}
+
+#booking-form label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    color: var(--text-muted);
+}
+
+#booking-form input,
+#booking-form select,
+#booking-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    background-color: #0f0f0f;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: var(--text-main);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+#booking-form input:focus,
+#booking-form select:focus,
+#booking-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+#booking-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a0a0a0' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+#booking-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn-submit {
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+}
+
 /* =========================================
    MOBILE RESPONSIVENESS (MEDIA QUERIES)
    ========================================= */
@@ -223,7 +352,8 @@ footer {
         gap: 10px;
     }
 
-    .hero-buttons a {
+    .hero-buttons a,
+    .hero-buttons button {
         width: 100%;
     }
 
@@ -239,7 +369,7 @@ footer {
 
     .service-card, .plan-card {
         width: 100%;
-        min-width: unset; /* Removes the minimum width constraint */
+        min-width: unset;
     }
 
     /* Footer */
@@ -248,8 +378,12 @@ footer {
         text-align: center;
         gap: 30px;
     }
-    
+
     footer {
         padding: 40px 20px;
+    }
+
+    .modal {
+        padding: 28px 20px;
     }
 }
