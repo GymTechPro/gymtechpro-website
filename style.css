@@ -319,7 +319,7 @@ footer {
     bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--accent-blue);
+    background-color: #1f8f4e;
     color: #fff;
     padding: 14px 24px;
     border-radius: 4px;
