@@ -215,15 +215,15 @@ footer {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.75);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 1000;
     padding: 20px;
 }
 
-.modal-overlay[hidden] {
-    display: none;
+.modal-overlay.is-open {
+    display: flex;
 }
 
 .modal {
@@ -312,6 +312,26 @@ footer {
     width: 100%;
     text-align: center;
     margin-top: 4px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-blue);
+    color: #fff;
+    padding: 14px 24px;
+    border-radius: 4px;
+    z-index: 1100;
+    font-size: 0.95rem;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.toast[hidden] {
+    display: none;
 }
 
 /* =========================================
